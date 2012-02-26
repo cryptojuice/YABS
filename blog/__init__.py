@@ -1,7 +1,7 @@
 from flask import Flask
 from blog import settings
-from views import  main
-from views.main import main
+from views.views import main
+from werkzeug.contrib.fixers import ProxyFix
 
 app = Flask("blog")
 app.register_blueprint(main)
