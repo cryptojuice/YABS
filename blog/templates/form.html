@@ -1,1 +1,22 @@
+{% extends "layout.html" %}
+{% block body %}
 
+<div class="post-container">
+</div>
+
+<form data-bind='submit: savePost'>
+    <label for="title">Title</label>
+    <input type='text' name='title' id='post_title' data-bind="value: newPost().title"/>
+
+    <label for="content">Post</label>
+    <textarea  name='content' id='post_content' data-bind="value: newPost().content"></textarea>
+
+    <label for="author">Author</label>
+    <input type='text' name='author' id='post_author' data-bind="value: newPost().author"/>
+
+    <label for="tags">Tags</label>
+    <input type='text' name'tags' id='post_tags' data-bind="value: newPost().tags" />
+    <input type='submit' name='submit' value='Save'/>
+</form>
+
+{% endblock %}

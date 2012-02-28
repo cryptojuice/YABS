@@ -10,6 +10,10 @@ collection = connection['yabs'].posts
 
 main = Blueprint('main', __name__)
 
+@main.route('/')
+def index():
+    return render_template('form.html')
+
 @main.route('/post/.json', methods=['GET'])
 def show_post():
     post = [p for p in collection.find()]
@@ -17,13 +21,13 @@ def show_post():
 
 @main.route('/post/new', methods=['POST'])
 def create_post():
-    author = request.form['author']
-    title  = request.form['title']
-    text   = request.form['text']
-    tags   = request.form['tags'].split(' ')
-    date   = datetime.now()
-    collection.insert({'author':author, 'title':title, 'text':text, 'tags':tags, 'date':date})
-    return True
+    title = request.form['title']
+    content =  request.form['content']
+    author =  request.form['author']
+    tags = request.form['tags'].split(' ')
+    date = datetime.now()
+    collection.insert({'title':title, 'content':content, 'author':author, 'tags':tags, 'date':date})
+    return redirect('main.index')
 
 @main.route('/post/update/<int:post_id>', methods=['PUT'])
 def update_post(post_id):
