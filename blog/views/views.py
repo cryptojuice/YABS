@@ -21,13 +21,14 @@ def show_post():
 
 @main.route('/post/new', methods=['POST'])
 def create_post():
-    title = request.form['title']
-    content =  request.form['content']
-    author =  request.form['author']
-    tags = request.form['tags'].split(' ')
-    date = datetime.now()
-    collection.insert({'title':title, 'content':content, 'author':author, 'tags':tags, 'date':date})
-    return redirect('main.index')
+    if request.method == "POST":
+        title = request.json['title']
+        content =  request.json['content']
+        author =  request.json['author']
+        tags = request.json['tags'].split(' ')
+        date = datetime.now()
+        collection.insert({'title':title, 'content':content, 'author':author, 'tags':tags, 'date':date})
+    return render_template('form.html')
 
 @main.route('/post/update/<int:post_id>', methods=['PUT'])
 def update_post(post_id):

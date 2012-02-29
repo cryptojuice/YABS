@@ -6,10 +6,11 @@ var Post = function () {
     //this.date = new Date()
 }
 
+
 var PostViewModel = function () {
     // Data
     var self = this;
-    self.posts = ko.observableArray([new Post()]);
+    self.posts = ko.observableArray([]);
     self.newPost = ko.observable(new Post());
 
     // Load data from server
@@ -23,8 +24,8 @@ var PostViewModel = function () {
     self.savePost = function () {
         alert(ko.toJSON(self.newPost()));
         $.ajax("/post/new", {
-            data: ko.toJSON(self.newPost()),
-            type: "post", contentType: "application/html",
+            data: ko.toJSON(self.newPost()), dataType: "json",
+            type: "post", contentType: "application/json",
             success: function(result) { alert(result) }
         });
     };
