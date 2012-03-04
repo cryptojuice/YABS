@@ -3,10 +3,11 @@
 <head>
     <meta charset = "utf-8" />
     <title> YABS </title> 
-    <script type='text/javascript' src='static/js/knockout-2.0.0.js'></script>
-    <script type='text/javascript' src='static/js/knockout.mapping-latest.js'></script>
-    <script type='text/javascript' src='static/js/jquery-1.7.1.min.js'></script>
-    <script type='text/javascript' src='static/js/yabs.js'></script>
+    <script type='text/javascript' src="{{ url_for('static', filename='js/knockout-2.0.0.js') }}"></script>
+    <script type='text/javascript' src="{{ url_for('static', filename='js/knockout.mapping-latest.js') }}"></script>
+    <script type='text/javascript' src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"></script>
+    <script type='text/javascript' src="{{ url_for('static', filename='js/yabs.js') }}"></script>
+    <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/bootstrap.css') }}" />
 </head>
 
 <body>
