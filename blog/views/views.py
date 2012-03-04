@@ -28,7 +28,8 @@ def create_post():
         tags = request.form['tags'].split(' ')
         date = datetime.now()
         collection.insert({'title':title, 'content':content, 'author':author, 'tags':tags, 'date':date})
-    return render_template('form.html')
+        return redirect(url_for('index'));
+    return render_template('form.html');
 
 @main.route('/post/update/<int:post_id>', methods=['PUT'])
 def update_post(post_id):
