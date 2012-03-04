@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<article data-bind="foreach: $data">
+<article data-bind="foreach: post">
     <header class='article_title'>
         <h1><a href="" data-bind="text: title"></a></h1>
-        <time data-bind="text: date.$date"></time>
+        <time data-bind="text: date"></time>
     </header>
 
     <span data-bind="text: content"></span>
