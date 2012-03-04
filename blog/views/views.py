@@ -4,6 +4,7 @@ from pymongo import Connection
 from bson import ObjectId, json_util
 from datetime import datetime
 import json
+import markdown2
 
 connection = Connection()
 collection = connection['yabs'].posts
@@ -23,12 +24,14 @@ def show_post():
 def create_post():
     if request.method == "POST":
         title = request.form['title']
-        content =  request.form['content']
+        content_md = request.form['content']
+        content =  markdown2.markdown(content_md)
         author =  request.form['author']
         tags = request.form['tags'].split(' ')
         date = datetime.now()
-        collection.insert({'title':title, 'content':content, 'author':author, 'tags':tags, 'date':date})
-        return redirect(url_for('index'));
+        collection.insert({'title':title, 'content':content,'content_md':content_md,\
+                'author':author, 'tags':tags, 'date':date})
+        return redirect(url_for('main.index'));
     return render_template('form.html');
 
 @main.route('/post/update/<int:post_id>', methods=['PUT'])
