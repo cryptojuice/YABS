@@ -3,32 +3,25 @@ var Post = function () {
     this.content = ko.observable();
     this.author = ko.observable();
     this.tags = ko.observable();
-    //this.date = new Date()
 }
 
+var viewModel = ko.mapping.fromJS(data);
 
-var PostViewModel = function () {
-    // Data
-    var self = this;
-    self.posts = ko.observableArray([]);
-    self.newPost = ko.observable(new Post());
+var newPost = function() { this.test = ko.observable(new Post());}
 
-    // Load data from server
-    $.getJSON("/post/.json", function(data) {
-        $.each(data, function(i, item){            
-            $('div.post-container').append('<p>' + ko.toJSON(item) + '</p>');
-        });
-    });
+var savePost = function () {
+    alert(ko.toJSON(newPost().test));
+    $.ajax("/post/new", {
+        data: ko.toJSON(newPost), dataType: "json",
+        type: "post", contentType: "application/json",
+        success: function(result) { alert(result) }
+     });
+};
 
-    // Save data to server
-    self.savePost = function () {
-        alert(ko.toJSON(self.newPost()));
-        $.ajax("/post/new", {
-            data: ko.toJSON(self.newPost()), dataType: "json",
-            type: "post", contentType: "application/json",
-            success: function(result) { alert(result) }
-        });
-    };
-}
+var data = $.getJSON("/post/.json", function(data) {
+    ko.mapping.fromJS(data, viewModel);
+});
 
-ko.applyBindings(new PostViewModel());
+$(document).ready(function() {
+    ko.applyBindings(viewModel);
+});

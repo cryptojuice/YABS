@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<article data-bind="foreach: $data">
+    <header class='article_title'>
+        <h1><a href="" data-bind="text: title"></a></h1>
+        <time data-bind="text: date.$date"></time>
+    </header>
+
+    <span data-bind="text: content"></span>
+
+    <footer class='article_footer'>
+        <span data-bind="text: author"></span>
+    </footer>
+</article>
+
+{% endblock %}

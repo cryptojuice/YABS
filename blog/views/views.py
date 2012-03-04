@@ -12,20 +12,20 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('form.html')
+    return render_template('index.html')
 
 @main.route('/post/.json', methods=['GET'])
 def show_post():
     post = [p for p in collection.find()]
     return json.dumps(post, default=json_util.default)
 
-@main.route('/post/new', methods=['POST'])
+@main.route('/post/new', methods=['GET', 'POST'])
 def create_post():
     if request.method == "POST":
-        title = request.json['title']
-        content =  request.json['content']
-        author =  request.json['author']
-        tags = request.json['tags'].split(' ')
+        title = request.form['title']
+        content =  request.form['content']
+        author =  request.form['author']
+        tags = request.form['tags'].split(' ')
         date = datetime.now()
         collection.insert({'title':title, 'content':content, 'author':author, 'tags':tags, 'date':date})
     return render_template('form.html')
