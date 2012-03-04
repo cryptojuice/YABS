@@ -1,26 +1,39 @@
-var Post = function () {
-    this.title = ko.observable();
-    this.content = ko.observable();
-    this.author = ko.observable();
-    this.tags = ko.observable();
+var Post = function (title, content, author, tags, date) {
+    this.title = ko.observable(title);
+    this.content = ko.observable(content);
+    this.author = ko.observable(author);
+    this.tags = ko.observable(tags);
+    this.myDate = new Date(date);
+    this.date = this.myDate.toString();
 }
 
-var viewModel = ko.mapping.fromJS(data);
+var mapping = {
+    create: function(options) {
+        return new Post(options.data.title, options.data.content, options.data.author, 
+                options.data.tags, options.data.date.$date);
+    }
+};
 
-var newPost = function() { this.test = ko.observable(new Post());}
+var initialData = ko.mapping.fromJS(data)
 
-var savePost = function () {
+var data = $.getJSON("/post/.json", function(data) {
+        ko.mapping.fromJS(data, initialData);
+});
+
+var viewModel = {
+    post: ko.mapping.fromJS(initialData, mapping)
+};
+
+//var newPost = function() { this.test = ko.observable(new Post());}
+
+/*var savePost = function () {
     alert(ko.toJSON(newPost().test));
     $.ajax("/post/new", {
         data: ko.toJSON(newPost), dataType: "json",
         type: "post", contentType: "application/json",
         success: function(result) { alert(result) }
      });
-};
-
-var data = $.getJSON("/post/.json", function(data) {
-    ko.mapping.fromJS(data, viewModel);
-});
+};*/
 
 $(document).ready(function() {
     ko.applyBindings(viewModel);
