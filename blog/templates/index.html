@@ -3,11 +3,11 @@
 
 <article data-bind="foreach: post">
     <header class='article_title'>
-        <h1><a href="" data-bind="text: title"></a></h1>
+        <h1><a data-bind="attr: { href: _id, title: title }"><span data-bind="text: title"></span></a></h1>
         <time data-bind="text: date"></time>
     </header>
 
-    <span data-bind="text: content"></span>
+    <span data-bind="html: content"></span>
 
     <footer class='article_footer'>
         <span data-bind="text: author"></span>
