@@ -2,16 +2,55 @@
 <html lang="en">
 <head>
     <meta charset = "utf-8" />
-    <title> YABS </title> 
+    <title> GANR Developer Diary </title> 
     <script type='text/javascript' src="{{ url_for('static', filename='js/knockout-2.0.0.js') }}"></script>
     <script type='text/javascript' src="{{ url_for('static', filename='js/knockout.mapping-latest.js') }}"></script>
     <script type='text/javascript' src="{{ url_for('static', filename='js/jquery-1.7.1.min.js') }}"></script>
     <script type='text/javascript' src="{{ url_for('static', filename='js/yabs.js') }}"></script>
     <link rel='stylesheet' type='text/css' href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+        .sidebar-nav {
+            padding: 9px 0;
+        }
+    </style>
 </head>
 
 <body>
-    {% block body %}
-    {% endblock %}
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="{{ url_for('main.index') }}">Diary by. GANR</a>
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="active"><a href="{{ url_for('main.index') }}">Home</a></li>
+                        <li><a href="{{ url_for('main.about') }}">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span3">
+                <!--Sidebar content-->
+                {% block sidebar %}
+                {% endblock %}
+            </div>
+            <div class="span9">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

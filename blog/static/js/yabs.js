@@ -3,15 +3,14 @@ var Post = function (title, content, author, tags, date, _id) {
     this.content = ko.observable(content);
     this.author = ko.observable(author);
     this.tags = ko.observable(tags);
-    this.myDate = new Date(date);
-    this.date = this.myDate.toString();
+    this.date = date;
     this._id = _id;
 }
 
 var mapping = {
     create: function(options) {
         return new Post(options.data.title, options.data.content, options.data.author, 
-                options.data.tags, options.data.date.$date, options.data._id.$oid);
+                options.data.tags, options.data.date, options.data._id.$oid);
     }
 };
 

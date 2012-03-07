@@ -1,16 +1,23 @@
 {% extends "layout.html" %}
+
+{% block sidebar %}
+    <ul data-bind="foreach: post">
+        <li><a data-bind="text: title"></a></li>
+    </ul>
+{% endblock %}
+
 {% block body %}
 
-<article data-bind="foreach: post">
+<article class='hero-unit' data-bind="foreach: post">
     <header class='article_title'>
-        <h1><a data-bind="attr: { href: _id, title: title }"><span data-bind="text: title"></span></a></h1>
-        <time data-bind="text: date"></time>
+        <h1><a data-bind="attr: { text: _id, text:_id }"><span data-bind="text: title"></span></a></h1>
+        <strong>Posted: <time data-bind="text: date"></time> By, </strong><strong data-bind="text: author"></strong>
     </header>
 
     <span data-bind="html: content"></span>
+    <a class="headerlink" href="#virtualenv" title="Permalink to this headline"></a></h2>
 
     <footer class='article_footer'>
-        <span data-bind="text: author"></span>
     </footer>
 </article>
 

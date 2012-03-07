@@ -28,7 +28,7 @@ def create_post():
         content =  markdown2.markdown(content_md)
         author =  request.form['author']
         tags = request.form['tags'].split(' ')
-        date = datetime.now()
+        date = datetime.strftime(datetime.now(),"%h %d, %Y")
         collection.insert({'title':title, 'content':content,'content_md':content_md,\
                 'author':author, 'tags':tags, 'date':date})
         return redirect(url_for('main.index'));
@@ -40,6 +40,10 @@ def update_post(post_id):
 
 @main.route('/post/delete/<int:post_id>', methods=['DELETE'])
 def delete_post(post_id):
+    pass
+
+@main.route('/about')
+def about():
     pass
 
 
