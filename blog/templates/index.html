@@ -1,24 +1,26 @@
 {% extends "layout.html" %}
 
 {% block sidebar %}
-    <ul data-bind="foreach: post">
-        <li><a data-bind="text: title"></a></li>
-    </ul>
+  {% for p in post %}
+    <li>{{ p.title }}</li>
+  {% endfor %}
 {% endblock %}
 
 {% block body %}
 
-<article class='hero-unit' data-bind="foreach: post">
+{% for p in post %}
+<article class='hero-unit'>
     <header class='article_title'>
-        <h1><a data-bind="attr: { text: _id, text:_id }"><span data-bind="text: title"></span></a></h1>
-        <strong>Posted: <time data-bind="text: date"></time> By, </strong><strong data-bind="text: author"></strong>
+        <h1><a href"#">{{ p.title }}</a></h1>
+        <strong>Posted: {{ p.date }} By, {{ p.author }}</strong>
     </header>
 
-    <span data-bind="html: content"></span>
+    <span>{{ p.content|safe }}</span>
     <a class="headerlink" href="#virtualenv" title="Permalink to this headline"></a></h2>
 
     <footer class='article_footer'>
     </footer>
 </article>
+{% endfor %}
 
 {% endblock %}

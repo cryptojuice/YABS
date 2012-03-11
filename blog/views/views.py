@@ -13,12 +13,13 @@ main = Blueprint('main', __name__)
 
 @main.route('/')
 def index():
-    return render_template('index.html')
+    post = [p for p in collection.find()]
+    return render_template('index.html', post=post)
 
 @main.route('/post/.json', methods=['GET'])
 def show_post():
     post = [p for p in collection.find()]
-    return json.dumps(post, default=json_util.default)
+    return render_template('index.html', post=post)
 
 @main.route('/post/new', methods=['GET', 'POST'])
 def create_post():
